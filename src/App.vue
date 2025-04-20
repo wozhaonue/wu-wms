@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import GlobalLayout from './components/GlobalLayout.vue'
+import GlobalLayout from './layouts/GlobalLayout.vue'
 </script>
 
 <style scoped></style>

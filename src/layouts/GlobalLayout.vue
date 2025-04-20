@@ -8,20 +8,37 @@
         collapsible
       >
         <div class="logo">
-          <img src="@/assets/favicon.svg" alt="" />
+          <img v-if="collapsed" src="@/assets/cangku.png" alt="" />
+          <div v-else>仓库管理系统</div>
         </div>
         <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="inline">
-          <a-menu-item key="1">
-            <user-outlined />
-            <span>nav 1</span>
+          <a-menu-item key="/">
+            <HomeOutlined />
+            <span>首页</span>
           </a-menu-item>
-          <a-menu-item key="2">
+          <a-menu-item key="/admin">
             <video-camera-outlined />
-            <span>nav 2</span>
+            <span>管理员管理</span>
           </a-menu-item>
-          <a-menu-item key="3">
-            <upload-outlined />
-            <span>nav 3</span>
+          <a-menu-item key="/user">
+            <UserOutlined />
+            <span>用户管理</span>
+          </a-menu-item>
+          <a-menu-item key="/warehouse">
+            <SplitCellsOutlined />
+            <span>仓库管理</span>
+          </a-menu-item>
+          <a-menu-item key="/category">
+            <PieChartOutlined />
+            <span>物品分类管理</span>
+          </a-menu-item>
+          <a-menu-item key="/goods">
+            <GoldOutlined />
+            <span>物品管理</span>
+          </a-menu-item>
+          <a-menu-item key="/record ">
+            <FileMarkdownOutlined />
+            <span>记录管理</span>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
@@ -58,22 +75,26 @@
           Content
         </a-layout-content>
         <a-layout-footer style="text-align: center; font-size: 17px">
-          仓库管理系统bywsb
+          仓库管理系统 by @wsb
         </a-layout-footer>
       </a-layout>
     </a-layout>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, h } from 'vue'
+import { ref } from 'vue'
 import {
-  UserOutlined,
+  HomeOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
+  UserOutlined,
+  SplitCellsOutlined,
+  PieChartOutlined,
+  GoldOutlined,
+  FileMarkdownOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons-vue'
-const selectedKeys = ref<string[]>(['1'])
+const selectedKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
 </script>
 <style scoped>
@@ -98,8 +119,20 @@ const collapsed = ref<boolean>(false)
   text-align: center;
   font-size: 28px;
 }
+#global-layout .logo {
+  margin-top: 10px;
+  text-align: center;
+}
 #global-layout .logo img {
-  width: 30px;
-  height: auto;
+  height: 30px;
+  width: auto;
+  display: inline-block;
+}
+#global-layout .logo div {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #434343;
+  font-weight: bold;
 }
 </style>
