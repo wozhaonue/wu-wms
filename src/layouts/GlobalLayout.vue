@@ -7,11 +7,18 @@
         :trigger="null"
         collapsible
       >
-        <div class="logo">
-          <img v-if="collapsed" src="@/assets/cangku.png" alt="" />
-          <div v-else>仓库管理系统</div>
-        </div>
-        <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="inline">
+        <RouterLink to="/">
+          <div class="logo">
+            <img v-if="collapsed" src="@/assets/cangku.png" alt="" />
+            <div v-else>仓库管理系统</div>
+          </div>
+        </RouterLink>
+        <a-menu
+          @click="doMenuClick"
+          v-model:selectedKeys="selectedKeys"
+          theme="light"
+          mode="inline"
+        >
           <a-menu-item key="/">
             <HomeOutlined />
             <span>首页</span>
@@ -36,7 +43,7 @@
             <GoldOutlined />
             <span>物品管理</span>
           </a-menu-item>
-          <a-menu-item key="/record ">
+          <a-menu-item key="/record">
             <FileMarkdownOutlined />
             <span>记录管理</span>
           </a-menu-item>
@@ -72,7 +79,7 @@
         <a-layout-content
           :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
         >
-          Content
+          <router-view></router-view>
         </a-layout-content>
         <a-layout-footer style="text-align: center; font-size: 17px">
           仓库管理系统 by @wsb
@@ -94,8 +101,22 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons-vue'
+import { useRouter } from 'vue-router'
 const selectedKeys = ref<string[]>([])
 const collapsed = ref<boolean>(false)
+const router = useRouter()
+//定义路由跳转事件
+const doMenuClick = ({ key }: { key: string }) => {
+  router.push({
+    path: key,
+  })
+}
+//更新高亮逻辑
+router.afterEach((to) => {
+  selectedKeys.value = [to.path]
+  //控制台打印value
+  console.log(selectedKeys.value)
+})
 </script>
 <style scoped>
 #components-layout-demo-custom-trigger .trigger {
